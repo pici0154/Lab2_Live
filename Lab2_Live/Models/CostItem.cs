@@ -18,5 +18,7 @@ namespace Lab2_Live.Models
         public DateTime Date { get; set; }
         public string Currency { get; set; }
         public CostType Type { get; set; }
+
+        public List<Comment> Comments { get; set; }
     }
 }

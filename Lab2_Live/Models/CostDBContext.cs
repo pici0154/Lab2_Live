@@ -14,6 +14,7 @@ namespace Lab2_Live.Models
         }
 
         public DbSet<CostItem> CostItems { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
 
     }
