@@ -9,6 +9,7 @@ using Lab2_Live.Models;
 
 namespace Lab2_Live.Controllers
 {
+    // -> CommentController -> [Route("api/[controller {$}]")] - pt id
     [Route("api/[controller]")]
     [ApiController]
     public class CostItemsController : ControllerBase

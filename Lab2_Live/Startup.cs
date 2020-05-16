@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using FluentValidation;
 using FluentValidation.AspNetCore;
 using Lab2_Live.ModelIValidators;
 using Lab2_Live.Models;
@@ -42,8 +41,10 @@ namespace Lab2_Live
                    option.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                    option.JsonSerializerOptions.IgnoreNullValues = true; 
                })
-                .AddFluentValidation()
-                .AddFluentValidation(fv=> fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
+                .AddFluentValidation(fv=> fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()))
+             //.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CommentValidator>())
+             //.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CostItemValidator>())
+             ;
 
             services.AddDbContext<CostDBContext>(opt => opt.UseSqlServer(Configuration.
                GetConnectionString("CostDBConnectionString")));

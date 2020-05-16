@@ -12,7 +12,8 @@ namespace Lab2_Live.ModelIValidators
     {
         public CommentValidator() {
             RuleFor(x => x.Id).NotNull();
-            RuleFor(x => x.Text).Length(10); // lenght max 10 char
+            RuleFor(x => x.Text).MinimumLength(5)
+                                .MaximumLength(10);  
         }
 
 
