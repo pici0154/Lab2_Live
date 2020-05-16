@@ -19,3 +19,4 @@ namespace Lab2_Live.Models
         public string Currency { get; set; }
         public CostType Type { get; set; }
     }
+}
