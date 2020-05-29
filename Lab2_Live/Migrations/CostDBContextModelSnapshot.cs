@@ -26,26 +26,29 @@ namespace Lab2_Live.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<long>("CostItemId")
+                        .HasColumnType("bigint");
+
                     b.Property<bool>("Important")
                         .HasColumnType("bit");
 
                     b.Property<string>("Text")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("costItemId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("costItemId");
+                    b.HasIndex("CostItemId");
 
                     b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("Lab2_Live.Models.CostItem", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Currency")
                         .HasColumnType("nvarchar(max)");
@@ -54,6 +57,7 @@ namespace Lab2_Live.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Location")
@@ -72,9 +76,11 @@ namespace Lab2_Live.Migrations
 
             modelBuilder.Entity("Lab2_Live.Models.Comment", b =>
                 {
-                    b.HasOne("Lab2_Live.Models.CostItem", "costItem")
+                    b.HasOne("Lab2_Live.Models.CostItem", null)
                         .WithMany("Comments")
-                        .HasForeignKey("costItemId");
+                        .HasForeignKey("CostItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

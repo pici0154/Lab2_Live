@@ -9,13 +9,13 @@ using Lab2_Live.Models;
 
 namespace Lab2_Live.Controllers
 {
-    // -> CommentController -> [Route("api/[controller {$}]")] - pt id
+    [Produces("application/json")]
     [Route("api/[controller]")]
+
     [ApiController]
     public class CostItemsController : ControllerBase
     {
-        private readonly CostDBContext _context;
-
+         private readonly CostDBContext _context; 
         public CostItemsController(CostDBContext context)
         {
             _context = context;
@@ -23,16 +23,19 @@ namespace Lab2_Live.Controllers
 
         // GET: api/CostItems
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CostItem>>> GetCostItems()
+        public async Task<ActionResult<IEnumerable<CostItem>>> GetCostItem()
         {
             return await _context.CostItems.ToListAsync();
         }
 
         // GET: api/CostItems/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<CostItem>> GetCostItem(string id)
+        public async Task<ActionResult<CostItem>> GetCostItem(long id)
         {
-            var costItem = await _context.CostItems.FindAsync(id);
+            var costItem = await _context.CostItems
+                                            .Include(c => c.Comments)
+                                            .FirstOrDefaultAsync(c => c.Id== id);
+
 
             if (costItem == null)
             {
@@ -40,13 +43,22 @@ namespace Lab2_Live.Controllers
             }
 
             return costItem;
+
+            /*   var costItem = await _context.CostItems.FindAsync(id);
+
+               if (costItem == null)
+               {
+                   return NotFound();
+               }
+
+               return costItem;*/
         }
 
         // PUT: api/CostItems/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCostItem(string id, CostItem costItem)
+        public async Task<IActionResult> PutCostItem(long id, CostItem costItem)
         {
             if (id != costItem.Id)
             {
@@ -102,7 +114,7 @@ namespace Lab2_Live.Controllers
 
         // DELETE: api/CostItems/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<CostItem>> DeleteCostItem(string id)
+        public async Task<ActionResult<CostItem>> DeleteCostItem(long id)
         {
             var costItem = await _context.CostItems.FindAsync(id);
             if (costItem == null)
@@ -116,7 +128,7 @@ namespace Lab2_Live.Controllers
             return costItem;
         }
 
-        private bool CostItemExists(string id)
+        private bool CostItemExists(long id)
         {
             return _context.CostItems.Any(e => e.Id == id);
         }

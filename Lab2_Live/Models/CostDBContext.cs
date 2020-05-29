@@ -10,12 +10,10 @@ namespace Lab2_Live.Models
     {
         public CostDBContext(DbContextOptions<CostDBContext> options)
             : base(options)
-        {
-        }
-
-        public DbSet<CostItem> CostItems { get; set; }
-        public DbSet<Comment> Comments { get; set; }
-
-
+    {
     }
+
+    public DbSet<CostItem> CostItems { get; set; }
+    public DbSet<Comment> Comments { get; set; }
+}
 }

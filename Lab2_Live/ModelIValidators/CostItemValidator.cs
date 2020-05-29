@@ -9,9 +9,9 @@ namespace Lab2_Live.ModelIValidators
 {
     public class CostItemValidator : AbstractValidator<CostItem>
     {
-        CostItemValidator()
+       public CostItemValidator()
         {
-            RuleFor(x => x.Id).MinimumLength(1);
+            RuleFor(x => x.Id).GreaterThan(0);
             RuleFor(x => x.Sum).GreaterThanOrEqualTo(100);
 
         }

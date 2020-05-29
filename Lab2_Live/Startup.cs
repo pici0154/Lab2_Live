@@ -47,7 +47,7 @@ namespace Lab2_Live
              ;
 
             services.AddDbContext<CostDBContext>(opt => opt.UseSqlServer(Configuration.
-               GetConnectionString("CostDBConnectionString")));
+                GetConnectionString("CostDBConnectionString")));
              
         }
 
