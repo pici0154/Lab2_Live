@@ -22,12 +22,64 @@ namespace Lab2_Live.Controllers
         }
 
         // GET: api/CostItems
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<CostItem>>> GetCostItem()
+        [HttpGet] 
+        public async Task<ActionResult<IEnumerable<CostItem>>> GetCostItems(DateTimeOffset? from = null,
+            DateTimeOffset? to = null, CostType? type = null)
         {
-            return await _context.CostItems.ToListAsync();
-        }
+            // filter by date from
+            //filter by type 
 
+
+            IQueryable<CostItem> result = _context.CostItems;
+
+            if (from != null && to != null && type != null)
+            {
+                result = result.Where(c => from <= c.Date && c.Date <= to && type == c.Type);
+            }
+            else if (from == null && to != null && type != null)
+            {
+                result = result.Where(c => c.Date <= to && type == c.Type);
+
+            }
+            else if (from == null && to == null && type != null)
+            {
+                result = result.Where(c => type == c.Type);
+
+            }
+            else if (from != null && to != null && type == null)
+            {
+                result = result.Where(c => from <= c.Date && c.Date <= to);
+            }
+            else if (from != null && to == null && type == null)
+            {
+                result = result.Where(c => from <= c.Date);
+            }
+            else if (from != null && to == null && type != null)
+            {
+                result = result.Where(c => from <= c.Date && type == c.Type);
+            }
+            else if (from == null && to != null && type == null)
+            {
+                result = result.Where(c => c.Date <= to);
+            }
+
+
+            /*
+                          var resultList = await result.ToListAsync();
+                         return resultList;
+            */
+                        var costItem = await result.Include(c => c.Comments).ToListAsync();
+
+                        if (costItem == null)
+                        {
+                            return NotFound();
+                        }
+
+                        return costItem;
+
+            // return await _context.CostItems.ToListAsync();
+        }
+       
         // GET: api/CostItems/5
         [HttpGet("{id}")]
         public async Task<ActionResult<CostItem>> GetCostItem(long id)

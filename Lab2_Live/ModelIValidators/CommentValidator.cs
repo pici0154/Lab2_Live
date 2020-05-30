@@ -11,9 +11,10 @@ namespace Lab2_Live.ModelIValidators
     public class CommentValidator : AbstractValidator<Comment>
     {
         public CommentValidator() {
-            RuleFor(x => x.Id).NotNull();
+           // RuleFor(x => x.Id).NotNull();
             RuleFor(x => x.Text).MinimumLength(5)
-                                .MaximumLength(10);  
+                                .MaximumLength(10);
+            RuleFor(x => x.CostItemId).NotNull();
         }
 
 

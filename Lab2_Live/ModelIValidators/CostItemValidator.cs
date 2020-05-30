@@ -11,8 +11,9 @@ namespace Lab2_Live.ModelIValidators
     {
        public CostItemValidator()
         {
-            RuleFor(x => x.Id).GreaterThan(0);
+           // RuleFor(x => x.Id).GreaterThan(0);
             RuleFor(x => x.Sum).GreaterThanOrEqualTo(100);
+            RuleFor(x => x.Description).MaximumLength(10);
 
         }
        
