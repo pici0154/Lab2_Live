@@ -20,7 +20,13 @@ namespace Lab2_Live.Controllers
         {
             _context = context;
         }
-
+        /// <summary>
+        /// Get a list of all CostItems. The list can be fitered by date ( from - to ) and by type.
+        /// </summary>
+        /// <param name="from"> Filter costs by date from. If the parameter is empty, all the costs will be displayed </param>
+        /// <param name="to"> Filter costs by date to. If the parameter is empty, all the costs will be displayed</param>
+        /// <param name="type"> Filter costs by type. If the parameter is empty, all the costs will be displayed</param>
+        /// <returns>A list of costs</returns>
         // GET: api/CostItems
         [HttpGet] 
         public async Task<ActionResult<IEnumerable<CostItem>>> GetCostItems(DateTimeOffset? from = null,
@@ -81,6 +87,11 @@ namespace Lab2_Live.Controllers
         }
        
         // GET: api/CostItems/5
+        /// <summary>
+        /// Get a specific CostItem by Id
+        /// </summary>
+        /// <param name="id">Search the cost by the give ID</param>
+        /// <returns>returns the specified cost item</returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<CostItem>> GetCostItem(long id)
         {
@@ -109,6 +120,12 @@ namespace Lab2_Live.Controllers
         // PUT: api/CostItems/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        /// <summary>
+        /// Update a specific CostItem 
+        /// </summary>
+        /// <param name="id">The CostItem will be updated for the specified id</param>
+        /// <param name="costItem">The updated data</param>
+        /// <returns>returns list of cost items with the updated cost item</returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCostItem(long id, CostItem costItem)
         {
@@ -141,6 +158,11 @@ namespace Lab2_Live.Controllers
         // POST: api/CostItems
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        /// <summary>
+        /// Create a new CostItem
+        /// </summary>
+        /// <param name="costItem">The new cost item</param>
+        /// <returns>Returns a list of cost items with the new cost item</returns>
         [HttpPost]
         public async Task<ActionResult<CostItem>> PostCostItem(CostItem costItem)
         {
@@ -165,6 +187,11 @@ namespace Lab2_Live.Controllers
         }
 
         // DELETE: api/CostItems/5
+        /// <summary>
+        /// Delete a specific CostItem
+        /// </summary>
+        /// <param name="id">Delete the item by specified id</param>
+        /// <returns>The list of cost items without the deleted object</returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult<CostItem>> DeleteCostItem(long id)
         {

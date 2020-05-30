@@ -21,6 +21,10 @@ namespace Lab2_Live.Controllers
         }
 
         // GET: api/Comments
+        /// <summary>
+        /// Get all comments
+        /// </summary>
+        /// <returns>Returns a list with all comments</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Comment>>> GetComments()
         {
@@ -28,6 +32,11 @@ namespace Lab2_Live.Controllers
         }
 
         // GET: api/Comments/5
+        /// <summary>
+        /// Get comment by specified id
+        /// </summary>
+        /// <param name="id">specified id</param>
+        /// <returns>returns the specified comment</returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Comment>> GetComment(long id)
         {
@@ -42,6 +51,12 @@ namespace Lab2_Live.Controllers
         }
 
         // PUT: api/Comments/5
+        /// <summary>
+        /// Update a specified comment
+        /// </summary>
+        /// <param name="id">specified id</param>
+        /// <param name="comment">the data with which the specified comment will be updated</param>
+        /// <returns>returns a list of comments with the updated specified comment</returns>
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
@@ -76,6 +91,11 @@ namespace Lab2_Live.Controllers
         // POST: api/Comments
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        /// <summary>
+        /// Create a new Comment
+        /// </summary>
+        /// <param name="comment">the data that will be inserted</param>
+        /// <returns>returns a list of comments with the new comment</returns>
         [HttpPost]
         public async Task<ActionResult<Comment>> PostComment(Comment comment)
         {
@@ -86,6 +106,11 @@ namespace Lab2_Live.Controllers
         }
 
         // DELETE: api/Comments/5
+        /// <summary>
+        /// Delete a specified comment
+        /// </summary>
+        /// <param name="id">specified ID</param>
+        /// <returns>returns a list of comments without the deleted comment</returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult<Comment>> DeleteComment(long id)
         {
