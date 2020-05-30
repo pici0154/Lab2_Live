@@ -9,6 +9,7 @@ using Lab2_Live.Models;
 
 namespace Lab2_Live.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class CommentsController : ControllerBase
@@ -54,12 +55,23 @@ namespace Lab2_Live.Controllers
         /// <summary>
         /// Update a specified comment
         /// </summary>
+        /// Sample request:
+        ///
+        ///     PUT /Todo
+        ///     {
+        ///        "id":1, 
+        ///        "text": "CommentUp",
+        ///        "important": true
+        ///        "CostItemId": 1
+        ///     }
         /// <param name="id">specified id</param>
         /// <param name="comment">the data with which the specified comment will be updated</param>
         /// <returns>returns a list of comments with the updated specified comment</returns>
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> PutComment(long id, Comment comment)
         {
             if (id != comment.Id)
@@ -93,10 +105,21 @@ namespace Lab2_Live.Controllers
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         /// <summary>
         /// Create a new Comment
+        /// Sample request:
+        ///
+        ///     POST /Todo
+        ///     {
+        ///         
+        ///        "text": "Comment1",
+        ///        "important": true
+        ///        "CostItemId": 1
+        ///     }
         /// </summary>
         /// <param name="comment">the data that will be inserted</param>
         /// <returns>returns a list of comments with the new comment</returns>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Comment>> PostComment(Comment comment)
         {
             _context.Comments.Add(comment);

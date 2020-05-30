@@ -9,7 +9,7 @@ using Lab2_Live.Models;
 
 namespace Lab2_Live.Controllers
 {
-    [Produces("application/json")]
+   
     [Route("api/[controller]")]
 
     [ApiController]
@@ -70,22 +70,22 @@ namespace Lab2_Live.Controllers
             }
 
 
-            /*
+            
                           var resultList = await result.ToListAsync();
                          return resultList;
-            */
-                        var costItem = await result.Include(c => c.Comments).ToListAsync();
+            /*
+                         var costItem = await result.Include(c => c.Comments).ToListAsync();
 
-                        if (costItem == null)
-                        {
-                            return NotFound();
-                        }
+                         if (costItem == null)
+                         {
+                             return NotFound();
+                         }
 
-                        return costItem;
-
+                         return costItem;
+              */
             // return await _context.CostItems.ToListAsync();
         }
-       
+
         // GET: api/CostItems/5
         /// <summary>
         /// Get a specific CostItem by Id
@@ -123,10 +123,22 @@ namespace Lab2_Live.Controllers
         /// <summary>
         /// Update a specific CostItem 
         /// </summary>
+        ///     PUT
+        ///     {
+        ///         "id": 1,
+        ///         "description": "tea",
+        ///         "sum": 2020,
+        ///         "location": "SM",
+        ///         "date": "2020-04-29T19:36:39.3388854",
+        ///         "currency": "euro",
+        ///         "type": "food",
+        ///     }
         /// <param name="id">The CostItem will be updated for the specified id</param>
         /// <param name="costItem">The updated data</param>
         /// <returns>returns list of cost items with the updated cost item</returns>
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> PutCostItem(long id, CostItem costItem)
         {
             if (id != costItem.Id)
@@ -161,9 +173,23 @@ namespace Lab2_Live.Controllers
         /// <summary>
         /// Create a new CostItem
         /// </summary>
+        /// Sample request:
+        ///
+        ///     POST 
+        ///     {
+        ///          
+        ///         "description": "bread",
+        ///         "sum": 2020,
+        ///         "location": "Cluj",
+        ///         "date": "2020-05-29T19:36:39.3388854",
+        ///         "currency": "euro",
+        ///         "type": "food",
+        ///     }
         /// <param name="costItem">The new cost item</param>
         /// <returns>Returns a list of cost items with the new cost item</returns>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<CostItem>> PostCostItem(CostItem costItem)
         {
             _context.CostItems.Add(costItem);
