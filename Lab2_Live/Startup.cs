@@ -1,22 +1,14 @@
- using System;
-using System.Collections.Generic;
-using System.Linq;
+using System; 
 using System.Reflection;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using FluentValidation.AspNetCore;
-using Lab2_Live.ModelIValidators;
+using System.Text.Json.Serialization; 
+using FluentValidation.AspNetCore; 
 using Lab2_Live.Models;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.Options;
+using Microsoft.AspNetCore.Hosting; 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Hosting; 
 using Microsoft.OpenApi.Models;
 using System.IO;
 
@@ -38,11 +30,11 @@ namespace Lab2_Live
             services
                 .AddControllers()
                 .AddJsonOptions(option =>
-               { 
-                   option.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-                   option.JsonSerializerOptions.IgnoreNullValues = true; 
-               })
-                .AddFluentValidation(fv=> fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()))
+                {
+                    option.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                    option.JsonSerializerOptions.IgnoreNullValues = true;
+                })
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()))
              //.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CommentValidator>())
              //.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CostItemValidator>())
              ;
@@ -81,7 +73,11 @@ namespace Lab2_Live
                 c.IncludeXmlComments(xmlPath);
             });
 
-           
+            // In production, the Angular files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "wwwroot/dist";
+            });
             //lab3 +
         }
 
@@ -106,15 +102,29 @@ namespace Lab2_Live
             }
 
             app.UseHttpsRedirection();
-
+                    
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseStaticFiles();          //lab3 live angular 
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+            //lab3 live angular
+            app.UseSpa(spa =>
+            {
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                // see https://go.microsoft.com/fwlink/?linkid=864501
+
+                spa.Options.SourcePath = "wwwroot"; 
+            });
+
+
+
+
         }
     }
 }

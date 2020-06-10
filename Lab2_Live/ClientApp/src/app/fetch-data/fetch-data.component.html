@@ -1,0 +1,45 @@
+<h1 id="tableLabel">Weather forecast</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="!flowers"><em>Loading...</em></p>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="flowers">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Market price</th>
+            <th>Upkeep difficulty</th>
+            <th>Number of comments</th>
+            <th>Operations</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let flower of flowers">
+            <td>{{ flower.name }}</td>
+            <td>{{ flower.description }}</td>
+            <td>{{ flower.marketPrice }}</td>
+            <td>{{ flower.flowerUpkeepDifficulty }}</td>
+            <td>{{ flower.numberOfComments }}</td>
+            <td>
+                <a class="btn btn-primary" [routerLink]="['/fetch-data', flower.id]" routerLinkActive="active">Details</a> |
+                <a class="btn btn-info">Edit</a> |
+                <a class="btn btn-danger" (click)="delete(flower.id)">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<p>Add a flower</p>
+
+
+<input [(ngModel)]="name" />
+
+<p>{{name}}</p>
+
+<button (click)="submit()">Submit!</button>
+
+
+<input type="date" />
