@@ -26,6 +26,8 @@ namespace Lab2_Live
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // configure DI (Dependency Injection) for application services
+           // services.AddScoped<IUserService, UserService>();
 
             services
                 .AddControllers()
@@ -106,7 +108,8 @@ namespace Lab2_Live
             app.UseRouting();
 
             app.UseAuthorization();
-            app.UseStaticFiles();          //lab3 live angular 
+
+            app.UseSpaStaticFiles();       //lab3 live angular 
 
             app.UseEndpoints(endpoints =>
             {
@@ -119,7 +122,12 @@ namespace Lab2_Live
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
-                spa.Options.SourcePath = "wwwroot"; 
+                spa.Options.SourcePath = "wwwroot";
+
+                //if (env.IsDevelopment())
+                //{
+                //    spa.UseAngularCliServer(npmScript: "start");
+                //}
             });
 
 
