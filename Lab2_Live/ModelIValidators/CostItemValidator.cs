@@ -15,7 +15,7 @@ namespace Lab2_Live.ModelIValidators
             RuleFor(x => x.Sum).GreaterThanOrEqualTo(100);
             RuleFor(x => x.Description).MaximumLength(10);
             RuleFor(x => x.Location).NotNull();
-            RuleFor(x => x.Type).NotNull();
+            RuleFor(x => x.Type).IsInEnum();
 
         }
        

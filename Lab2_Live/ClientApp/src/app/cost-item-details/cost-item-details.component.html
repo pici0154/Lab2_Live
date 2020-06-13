@@ -1,0 +1,41 @@
+<p>cost-item-details works!</p>
+
+<p *ngIf="!costItem"><em>Loading...</em></p>
+
+<a [routerLink]="['/fetch-data']" routerLinkActive="active">Back</a>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="costItem">
+    <tbody>
+
+        <tr>
+            <th>Description</th>
+            <td>{{ costItem.description }}</td>
+        </tr>
+        <tr>
+            <th>Location</th>
+            <td>{{ costItem.location }}</td>
+        </tr>
+        <tr>
+            <th>Date</th>
+            <td>{{ costItem.date }}</td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td>{{ costItem.type }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Comments</h2>
+<table *ngIf="costItem">
+    <thead>
+        <tr>
+            <th>Text</th>
+            <th>Important</th>
+        </tr>
+    </thead>
+    <tr *ngFor="let comment of costItem.comments">
+        <td>{{ comment.text }}</td>
+        <td>{{ comment.important }}</td>
+    </tr>
+</table>
+<a [routerLink]="['/fetch-data']" routerLinkActive="active">Back</a>

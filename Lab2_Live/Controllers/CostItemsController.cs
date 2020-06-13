@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Lab2_Live.Models;
+using Lab2_Live.Models; 
 
 namespace Lab2_Live.Controllers
 {
@@ -28,8 +28,8 @@ namespace Lab2_Live.Controllers
         /// <param name="type"> Filter costs by type. If the parameter is empty, all the costs will be displayed</param>
         /// <returns>A list of costs</returns>
         // GET: api/CostItems
-        [HttpGet] 
-        public async Task<ActionResult<IEnumerable<CostItem>>> GetCostItems(DateTimeOffset? from = null,
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<DTOs.CostItemDTO>>> GetCostItems(DateTimeOffset? from = null,
             DateTimeOffset? to = null, CostType? type = null)
         {
             // filter by date from
@@ -70,9 +70,12 @@ namespace Lab2_Live.Controllers
             }
 
 
-            
-                          var resultList = await result.ToListAsync();
-                         return resultList;
+
+            var resultList = await result
+                .Include(f => f.Comments)
+                .Select(f => DTOs.CostItemDTO.FromCostItem(f))
+                .ToListAsync();
+               return resultList;
             /*
                          var costItem = await result.Include(c => c.Comments).ToListAsync();
 
@@ -98,7 +101,6 @@ namespace Lab2_Live.Controllers
             var costItem = await _context.CostItems
                                             .Include(c => c.Comments)
                                             .FirstOrDefaultAsync(c => c.Id== id);
-
 
             if (costItem == null)
             {

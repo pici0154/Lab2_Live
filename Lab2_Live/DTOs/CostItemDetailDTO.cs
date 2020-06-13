@@ -20,5 +20,9 @@ namespace Lab2_Live.DTOs
         public string Currency { get; set; }
         public CostType Type { get; set; }
         public List<Comment> Comments { get; set; }
+ 
+
+
+
     }
 }

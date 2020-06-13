@@ -9,7 +9,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { FlowerDetailsComponent } from './flower-details/flower-details.component';
+import { CostItemDetailsComponent } from './cost-item-details/cost-item-details.component'; 
 
 @NgModule({
     declarations: [
@@ -18,7 +18,7 @@ import { FlowerDetailsComponent } from './flower-details/flower-details.componen
         HomeComponent,
         CounterComponent,
         FetchDataComponent,
-        FlowerDetailsComponent
+        CostItemDetailsComponent, 
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -38,8 +38,8 @@ import { FlowerDetailsComponent } from './flower-details/flower-details.componen
                 //]
             },
             {
-                path: 'fetch-data/:flowerId',
-                component: FlowerDetailsComponent,
+                path: 'fetch-data/:costItemId',
+                component: CostItemDetailsComponent,
             },
             { path: 'my-route', component: CounterComponent },
         ])
