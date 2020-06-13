@@ -39,11 +39,11 @@
 <p>Add a new cost </p>
 <p>Description:</p>
 <input [(ngModel)]="description" id="description" />
-<p id="ErrorDescription">{{description}}</p>
+<p>{{description}}</p><p style="color:red;">{{descriptionE}}</p>
 
 <p>Sum:</p>
 <input [(ngModel)]="sum" id="sum" /> 
-<p>{{sum}}</p>
+<p>{{sum}}</p><p style="color:red;">{{sumE}}</p>
 
 <p>Location:</p>
 <input [(ngModel)]="location" id="location" />
@@ -51,11 +51,11 @@
 
 <p>Currency:</p>
 <input [(ngModel)]="currency" id="currency"/>
-<p id="ErrorCurrency">{{currency}}</p>
+<p>{{currency}}</p>
 
 <p>Type: </p>
 <input [(ngModel)]="type" id="type" />
-<p id="ErrorType">{{type}}</p>
+<p>{{type}}</p><p style="color:red;">{{typeE}}</p>
 
 <button (click)="submit()">Submit!</button>
 

@@ -48,7 +48,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h1 id=\"tableLabel\">Cost Items</h1>\n\n<p>This component demonstrates fetching data from the cost item server.</p>\n\n<p *ngIf=\"!costItems\"><em>Loading...</em></p>\n<table class='table table-striped' aria-labelledby=\"tableLabel\" *ngIf=\"costItems\">\n    <thead>\n        <tr>\n            <th>Description</th>\n            <th>Sum</th>\n            <th>Location</th>\n            <th>Date</th>\n            <th>Currency</th>\n            <th>Type</th>\n            <th>Number of comments </th>\n            <th>Operatii</th>\n\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let costItem of costItems\">\n            <td>{{ costItem.description }}</td>\n            <td>{{ costItem.sum }}</td>\n            <td>{{ costItem.location }}</td>\n            <td>{{ costItem.date }}</td>\n            <td>{{ costItem.currency }}</td>\n            <td>{{ costItem.type }}</td>\n            <td>{{ costItem.numberOfComments }}</td>\n            <td>\n                <a class=\"btn btn-primary\" [routerLink]=\"['/fetch-data', costItem.id]\" routerLinkActive=\"active\">Details</a> |\n                <a class=\"btn btn-info\">Edit</a> |\n                <a class=\"btn btn-danger\" (click)=\"delete(costItem.id)\">Delete</a>\n            </td>\n        </tr>\n    </tbody>\n</table>\n\n\n<p>Add a new cost </p>\n<p>Description:</p>\n<input [(ngModel)]=\"description\" id=\"description\" />\n<p id=\"ErrorDescription\">{{description}}</p>\n\n<p>Sum:</p>\n<input [(ngModel)]=\"sum\" id=\"sum\" /> \n<p>{{sum}}</p>\n\n<p>Location:</p>\n<input [(ngModel)]=\"location\" id=\"location\" />\n<p>{{location}}</p>\n\n<p>Currency:</p>\n<input [(ngModel)]=\"currency\" id=\"currency\"/>\n<p id=\"ErrorCurrency\">{{currency}}</p>\n\n<p>Type: </p>\n<input [(ngModel)]=\"type\" id=\"type\" />\n<p id=\"ErrorType\">{{type}}</p>\n\n<button (click)=\"submit()\">Submit!</button>\n\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<h1 id=\"tableLabel\">Cost Items</h1>\n\n<p>This component demonstrates fetching data from the cost item server.</p>\n\n<p *ngIf=\"!costItems\"><em>Loading...</em></p>\n<table class='table table-striped' aria-labelledby=\"tableLabel\" *ngIf=\"costItems\">\n    <thead>\n        <tr>\n            <th>Description</th>\n            <th>Sum</th>\n            <th>Location</th>\n            <th>Date</th>\n            <th>Currency</th>\n            <th>Type</th>\n            <th>Number of comments </th>\n            <th>Operatii</th>\n\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let costItem of costItems\">\n            <td>{{ costItem.description }}</td>\n            <td>{{ costItem.sum }}</td>\n            <td>{{ costItem.location }}</td>\n            <td>{{ costItem.date }}</td>\n            <td>{{ costItem.currency }}</td>\n            <td>{{ costItem.type }}</td>\n            <td>{{ costItem.numberOfComments }}</td>\n            <td>\n                <a class=\"btn btn-primary\" [routerLink]=\"['/fetch-data', costItem.id]\" routerLinkActive=\"active\">Details</a> |\n                <a class=\"btn btn-info\">Edit</a> |\n                <a class=\"btn btn-danger\" (click)=\"delete(costItem.id)\">Delete</a>\n            </td>\n        </tr>\n    </tbody>\n</table>\n\n\n<p>Add a new cost </p>\n<p>Description:</p>\n<input [(ngModel)]=\"description\" id=\"description\" />\n<p>{{description}}</p><p style=\"color:red;\">{{descriptionE}}</p>\n\n<p>Sum:</p>\n<input [(ngModel)]=\"sum\" id=\"sum\" /> \n<p>{{sum}}</p><p style=\"color:red;\">{{sumE}}</p>\n\n<p>Location:</p>\n<input [(ngModel)]=\"location\" id=\"location\" />\n<p>{{location}}</p>\n\n<p>Currency:</p>\n<input [(ngModel)]=\"currency\" id=\"currency\"/>\n<p>{{currency}}</p>\n\n<p>Type: </p>\n<input [(ngModel)]=\"type\" id=\"type\" />\n<p>{{type}}</p><p style=\"color:red;\">{{typeE}}</p>\n\n<button (click)=\"submit()\">Submit!</button>\n\n\n");
 
 /***/ }),
 
@@ -374,6 +374,9 @@ let FetchDataComponent = class FetchDataComponent {
     constructor(http, baseUrl) {
         this.http = http;
         this.baseUrl = baseUrl;
+        this.descriptionE = ' ';
+        this.sumE = '';
+        this.typeE = '';
         this.loadCostItems();
     }
     loadCostItems() {
@@ -407,13 +410,13 @@ let FetchDataComponent = class FetchDataComponent {
             if (error.status == 400) {
                 console.log(error.error.errors);
                 if (error.error.errors.Description != "") {
-                    document.getElementById("description").value = error.error.errors.Description;
+                    this.descriptionE = error.error.errors.Description[0];
                 }
                 if (error.error.errors.Sum != "") {
-                    document.getElementById("sum").value = error.error.errors.Sum;
+                    this.sumE = error.error.errors.Sum;
                 }
                 if (error.error.errors.Type != "") {
-                    document.getElementById("type").value = error.error.errors.Type;
+                    this.typeE = error.error.errors.Type;
                 }
             }
         });

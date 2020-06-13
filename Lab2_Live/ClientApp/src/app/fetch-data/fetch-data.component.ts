@@ -7,6 +7,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FetchDataComponent {
     public costItems: CostItem[];
+    public descriptionE: string = ' ';
+    public sumE : string = '';
+    public typeE: string = '';
 
     constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
         this.loadCostItems();
@@ -56,15 +59,15 @@ export class FetchDataComponent {
 
                 if (error.error.errors.Description != "")
                 {
-                   // (<HTMLInputElement>document.getElementById("description")).value = error.error.errors.Description;
+                   this.descriptionE = error.error.errors.Description[0];
                 }
 
                 if (error.error.errors.Sum != "") {
-                 //   (<HTMLInputElement>document.getElementById("sum")).value = error.error.errors.Sum;
+                 this.sumE = error.error.errors.Sum;
                 }
 
                 if (error.error.errors.Type != "") {
-                 //   (<HTMLInputElement>document.getElementById("type")).value = error.error.errors.Type;
+                 this.typeE = error.error.errors.Type;
                 }
 
             }
