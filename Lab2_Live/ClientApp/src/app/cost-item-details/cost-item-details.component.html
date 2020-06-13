@@ -1,14 +1,23 @@
-<p>cost-item-details works!</p>
+
 
 <p *ngIf="!costItem"><em>Loading...</em></p>
 
 <a [routerLink]="['/fetch-data']" routerLinkActive="active">Back</a>
+
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="costItem">
     <tbody>
 
         <tr>
             <th>Description</th>
             <td>{{ costItem.description }}</td>
+        </tr>
+        <tr>
+            <th>Sum</th>
+            <td>{{ costItem.sum }}</td>
+        </tr>
+        <tr>
+            <th>Currency</th>
+            <td>{{ costItem.currency }}</td>
         </tr>
         <tr>
             <th>Location</th>

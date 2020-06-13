@@ -22,7 +22,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<p>cost-item-details works!</p>\n\n<p *ngIf=\"!costItem\"><em>Loading...</em></p>\n\n<a [routerLink]=\"['/fetch-data']\" routerLinkActive=\"active\">Back</a>\n<table class='table table-striped' aria-labelledby=\"tableLabel\" *ngIf=\"costItem\">\n    <tbody>\n\n        <tr>\n            <th>Description</th>\n            <td>{{ costItem.description }}</td>\n        </tr>\n        <tr>\n            <th>Location</th>\n            <td>{{ costItem.location }}</td>\n        </tr>\n        <tr>\n            <th>Date</th>\n            <td>{{ costItem.date }}</td>\n        </tr>\n        <tr>\n            <th>Type</th>\n            <td>{{ costItem.type }}</td>\n        </tr>\n    </tbody>\n</table>\n\n<h2>Comments</h2>\n<table *ngIf=\"costItem\">\n    <thead>\n        <tr>\n            <th>Text</th>\n            <th>Important</th>\n        </tr>\n    </thead>\n    <tr *ngFor=\"let comment of costItem.comments\">\n        <td>{{ comment.text }}</td>\n        <td>{{ comment.important }}</td>\n    </tr>\n</table>\n<a [routerLink]=\"['/fetch-data']\" routerLinkActive=\"active\">Back</a>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("\n\n<p *ngIf=\"!costItem\"><em>Loading...</em></p>\n\n<a [routerLink]=\"['/fetch-data']\" routerLinkActive=\"active\">Back</a>\n\n<table class='table table-striped' aria-labelledby=\"tableLabel\" *ngIf=\"costItem\">\n    <tbody>\n\n        <tr>\n            <th>Description</th>\n            <td>{{ costItem.description }}</td>\n        </tr>\n        <tr>\n            <th>Sum</th>\n            <td>{{ costItem.sum }}</td>\n        </tr>\n        <tr>\n            <th>Currency</th>\n            <td>{{ costItem.currency }}</td>\n        </tr>\n        <tr>\n            <th>Location</th>\n            <td>{{ costItem.location }}</td>\n        </tr>\n        <tr>\n            <th>Date</th>\n            <td>{{ costItem.date }}</td>\n        </tr>\n        <tr>\n            <th>Type</th>\n            <td>{{ costItem.type }}</td>\n        </tr>\n    </tbody>\n</table>\n\n<h2>Comments</h2>\n<table *ngIf=\"costItem\">\n    <thead>\n        <tr>\n            <th>Text</th>\n            <th>Important</th>\n        </tr>\n    </thead>\n    <tr *ngFor=\"let comment of costItem.comments\">\n        <td>{{ comment.text }}</td>\n        <td>{{ comment.important }}</td>\n    </tr>\n</table>\n<a [routerLink]=\"['/fetch-data']\" routerLinkActive=\"active\">Back</a>\n");
 
 /***/ }),
 
@@ -48,7 +48,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h1 id=\"tableLabel\">Cost Items</h1>\n\n<p>This component demonstrates fetching data from the cost item server.</p>\n\n<p *ngIf=\"!costItems\"><em>Loading...</em></p>\n<table class='table table-striped' aria-labelledby=\"tableLabel\" *ngIf=\"costItems\">\n    <thead>\n        <tr>\n            <th>Description</th>\n            <th>Sum</th>\n            <th>Location</th>\n            <th>Date</th>\n            <th>Currency</th>\n            <th>Type</th>\n            <th>Number of comments </th>\n            <th>Operatii</th>\n\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let costItem of costItems\">\n            <td>{{ costItem.description }}</td>\n            <td>{{ costItem.sum }}</td>\n            <td>{{ costItem.location }}</td>\n            <td>{{ costItem.date }}</td>\n            <td>{{ costItem.currency }}</td>\n            <td>{{ costItem.type }}</td>\n            <td>{{ costItem.numberOfComments }}</td>\n            <td>\n                <a class=\"btn btn-primary\" [routerLink]=\"['/fetch-data', costItem.id]\" routerLinkActive=\"active\">Details</a> |\n                <a class=\"btn btn-info\">Edit</a> |\n                <a class=\"btn btn-danger\" (click)=\"delete(costItem.id)\">Delete</a>\n            </td>\n        </tr>\n    </tbody>\n</table>\n\n\n<p>Add a new cost </p>\n<p>Description:</p>\n<input [(ngModel)]=\"description\" id=\"description\" />\n<p>{{description}}</p><p style=\"color:red;\">{{descriptionE}}</p>\n\n<p>Sum:</p>\n<input [(ngModel)]=\"sum\" id=\"sum\" /> \n<p>{{sum}}</p><p style=\"color:red;\">{{sumE}}</p>\n\n<p>Location:</p>\n<input [(ngModel)]=\"location\" id=\"location\" />\n<p>{{location}}</p>\n\n<p>Currency:</p>\n<input [(ngModel)]=\"currency\" id=\"currency\"/>\n<p>{{currency}}</p>\n\n<p>Type: </p>\n<input [(ngModel)]=\"type\" id=\"type\" />\n<p>{{type}}</p><p style=\"color:red;\">{{typeE}}</p>\n\n<button (click)=\"submit()\">Submit!</button>\n\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<h1 id=\"tableLabel\">Cost Items</h1>\n\n<p>This component demonstrates fetching data from the cost item server.</p>\n\n<p *ngIf=\"!costItems\"><em>Loading...</em></p>\n<table class='table table-striped' aria-labelledby=\"tableLabel\" *ngIf=\"costItems\">\n    <thead>\n        <tr>\n            <th>Description</th>\n            <th>Sum</th>\n            <th>Location</th>\n            <th>Date</th>\n            <th>Currency</th>\n            <th>Type</th>\n            <th>Number of comments </th>\n            <th>Operatii</th>\n\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let costItem of costItems\">\n            <td>{{ costItem.description }}</td>\n            <td>{{ costItem.sum }}</td>\n            <td>{{ costItem.location }}</td>\n            <td>{{ costItem.date }}</td>\n            <td>{{ costItem.currency }}</td>\n            <td>{{ costItem.type }}</td>\n            <td>{{ costItem.numberOfComments }}</td>\n            <td>\n                <a class=\"btn btn-primary\" [routerLink]=\"['/fetch-data', costItem.id]\" routerLinkActive=\"active\">Details</a> |\n                <a class=\"btn btn-info\" (click)=\"edit($event,costItem.id)\" >Edit</a> |\n                <a class=\"btn btn-danger\" (click)=\"delete(costItem.id)\">Delete</a>\n            </td>\n        </tr>\n    </tbody>\n</table>\n\n\n<p>Add a new cost </p>\n<p>Description:</p>\n<input [(ngModel)]=\"description\" id=\"description\" />\n<p>{{description}}</p><p style=\"color:red;\">{{descriptionE}}</p>\n\n<p>Sum:</p>\n<input [(ngModel)]=\"sum\" id=\"sum\" />\n<p>{{sum}}</p><p style=\"color:red;\">{{sumE}}</p>\n\n<p>Currency:</p>\n<input [(ngModel)]=\"currency\" id=\"currency\" />\n<p>{{currency}}</p>\n\n<p>Location:</p>\n<input [(ngModel)]=\"location\" id=\"location\" />\n<p>{{location}}</p>\n\n<p>Date:</p>\n<input type=\"date\" [(ngModel)]=\"date\" id=\"date\" />\n<p>{{date}}</p>\n\n<p>Type: </p>\n<input [(ngModel)]=\"type\" id=\"type\" />\n<p>{{type}}</p><p style=\"color:red;\">{{typeE}}</p>\n\n<button (click)=\"submit()\">Submit!</button>\n\n\n");
 
 /***/ }),
 
@@ -267,6 +267,8 @@ let CostItemDetailsComponent = class CostItemDetailsComponent {
         this.http = http;
         this.baseUrl = baseUrl;
         this.route = route;
+        this.enableEdit = false;
+        this.enableEditIndex = null;
     }
     loadCostItem(costItemId) {
         this.http.get(this.baseUrl + 'api/costItems/' + costItemId).subscribe(result => {
@@ -278,6 +280,11 @@ let CostItemDetailsComponent = class CostItemDetailsComponent {
         this.route.paramMap.subscribe(params => {
             this.loadCostItem(params.get('costItemId'));
         });
+    }
+    edit(costItemId) {
+        this.enableEdit = true;
+        this.enableEditIndex = costItemId;
+        console.log(costItemId);
     }
 };
 CostItemDetailsComponent.ctorParameters = () => [
@@ -374,6 +381,9 @@ let FetchDataComponent = class FetchDataComponent {
     constructor(http, baseUrl) {
         this.http = http;
         this.baseUrl = baseUrl;
+        this.description = ' ';
+        this.location = ' ';
+        this.currency = ' ';
         this.descriptionE = ' ';
         this.sumE = '';
         this.typeE = '';
@@ -394,15 +404,25 @@ let FetchDataComponent = class FetchDataComponent {
             }, error => alert('Cannot delete cost item - maybe it has comments?'));
         }
     }
+    edit(e, costItemId) {
+        var costItem = {};
+        costItem.id = Number(costItemId);
+        costItem.description = this.description;
+        costItem.sum = Number(this.sum);
+        costItem.location = this.location;
+        costItem.date = this.date; //new Date;
+        costItem.currency = this.currency;
+        costItem.type = this.type;
+    }
     submit() {
         var costItem = {};
         // costItem.id = 10;
-        costItem.description = document.getElementById("description").value;
-        costItem.sum = Number(document.getElementById("sum").value);
-        costItem.location = document.getElementById("location").value;
-        costItem.date = new Date;
-        costItem.currency = document.getElementById("currency").value;
-        costItem.type = CostType.food;
+        costItem.description = this.description;
+        costItem.sum = Number(this.sum);
+        costItem.location = this.location;
+        costItem.date = this.date; //new Date;
+        costItem.currency = this.currency;
+        costItem.type = this.type;
         this.http.post(this.baseUrl + 'api/costItems', costItem).subscribe(result => {
             console.log('success!');
             this.loadCostItems();

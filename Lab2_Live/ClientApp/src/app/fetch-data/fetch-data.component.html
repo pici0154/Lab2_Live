@@ -28,7 +28,7 @@
             <td>{{ costItem.numberOfComments }}</td>
             <td>
                 <a class="btn btn-primary" [routerLink]="['/fetch-data', costItem.id]" routerLinkActive="active">Details</a> |
-                <a class="btn btn-info">Edit</a> |
+                <a class="btn btn-info" (click)="edit($event,costItem.id)" >Edit</a> |
                 <a class="btn btn-danger" (click)="delete(costItem.id)">Delete</a>
             </td>
         </tr>
@@ -42,16 +42,20 @@
 <p>{{description}}</p><p style="color:red;">{{descriptionE}}</p>
 
 <p>Sum:</p>
-<input [(ngModel)]="sum" id="sum" /> 
+<input [(ngModel)]="sum" id="sum" />
 <p>{{sum}}</p><p style="color:red;">{{sumE}}</p>
+
+<p>Currency:</p>
+<input [(ngModel)]="currency" id="currency" />
+<p>{{currency}}</p>
 
 <p>Location:</p>
 <input [(ngModel)]="location" id="location" />
 <p>{{location}}</p>
 
-<p>Currency:</p>
-<input [(ngModel)]="currency" id="currency"/>
-<p>{{currency}}</p>
+<p>Date:</p>
+<input type="date" [(ngModel)]="date" id="date" />
+<p>{{date}}</p>
 
 <p>Type: </p>
 <input [(ngModel)]="type" id="type" />

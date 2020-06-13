@@ -9,6 +9,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CostItemDetailsComponent implements OnInit {
     private costItem: CostItemWithDetails;
+
+
+    public enableEdit: boolean = false;
+    public enableEditIndex: number = null;
+
+
     constructor(
         private http: HttpClient,
         @Inject('BASE_URL') private baseUrl: string,
@@ -26,7 +32,11 @@ export class CostItemDetailsComponent implements OnInit {
             this.loadCostItem(params.get('costItemId'));
         });
   }
-
+    edit(costItemId: number) {
+        this.enableEdit = true;
+        this.enableEditIndex = costItemId;
+        console.log(costItemId);
+    }
 }
 interface CostItemWithDetails {
     id: number;

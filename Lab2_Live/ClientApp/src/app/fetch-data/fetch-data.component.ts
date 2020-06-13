@@ -7,6 +7,15 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FetchDataComponent {
     public costItems: CostItem[];
+
+    public description: string = ' ';
+    public sum: number;
+    public location: string = ' ';
+    public date: Date;
+    public currency: string = ' ';
+    public type: CostType;
+
+
     public descriptionE: string = ' ';
     public sumE : string = '';
     public typeE: string = '';
@@ -37,17 +46,28 @@ export class FetchDataComponent {
         }
     }
 
-    submit() {
+    edit(e, costItemId: string) {
+        var costItem: CostItem = <CostItem>{};
 
+        costItem.id = Number(costItemId);
+        costItem.description = this.description;
+        costItem.sum = Number(this.sum);
+        costItem.location = this.location;
+        costItem.date = this.date; //new Date;
+        costItem.currency = this.currency;
+        costItem.type = this.type;
+    }
+
+    submit() {
 
         var costItem: CostItem = <CostItem>{};
         // costItem.id = 10;
-        costItem.description = (<HTMLInputElement>document.getElementById("description")).value;
-        costItem.sum = Number((<HTMLInputElement>document.getElementById("sum")).value);
-        costItem.location = (<HTMLInputElement>document.getElementById("location")).value;
-        costItem.date = new Date;
-        costItem.currency = (<HTMLInputElement>document.getElementById("currency")).value;
-        costItem.type = CostType.food;
+        costItem.description = this.description;
+        costItem.sum = Number(this.sum); 
+        costItem.location = this.location; 
+        costItem.date = this.date; //new Date;
+        costItem.currency = this.currency; 
+        costItem.type = this.type;
 
         this.http.post(this.baseUrl + 'api/costItems', costItem).subscribe(result => {
             console.log('success!');
